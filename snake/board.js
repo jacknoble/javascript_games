@@ -7,11 +7,16 @@
     this.snake = new SnakeGame.Snake([start, start]);
     this.apples = [];
     this.grid = Board.makeGrid();
+    this.score = 0;
     var that = this;
     _(3).times(function(n){
       that.addApple();
     })
   };
+
+  Board.prototype.updateScore = function(){
+    this.score += (10 * (this.snake.segments.length));
+  }
 
 
   Board.prototype.hitWall = function(){
@@ -28,8 +33,12 @@
       var head = snake.head();
       if (head[0] === apple[0] && head[1] === apple[1]){
         apples.splice(index, 1);
+        board.updateScore();
         _(3).times(function(n) { snake.addSegment() });
         board.addApple();
+        return true;
+      } else {
+        return false;
       }
     })
   }
@@ -53,10 +62,14 @@
         cellType = "A";
       }
     })
-
-    this.snake.segments.forEach(function(segment){
+    var snakeSegments = this.snake.segments;
+    var headIndex = snakeSegments.length - 1;
+    snakeSegments.forEach(function(segment, segIndex){
       if (segment[0] === rowIndex && segment[1] === colIndex){
         cellType = "S";
+        if (segIndex === headIndex){
+          cellType = "H";
+        }
       }
     })
 

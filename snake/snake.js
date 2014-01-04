@@ -2,12 +2,12 @@
   var SnakeGame = root.SnakeGame = ( root.SnakeGame || {} );
 
   var Snake = SnakeGame.Snake = function(headPos) {
-    this.dir = 'N';
+    this.dir = "X";
     this.segments = [headPos];
   }
 
   Snake.dirHash = { "W":[0,-1], "E":[0,1],
-                    "S":[1,0],  "N":[-1,0] };
+                    "S":[1,0],  "N":[-1,0], "X":[0,0] };
 
   Snake.prototype.move =function(){
     for(var i = 0; i < this.segments.length-1; i++) {
@@ -19,7 +19,9 @@
   }
 
   Snake.prototype.turn = function(newDir) {
-    this.dir = newDir;
+    if (Snake.dirHash[newDir][0] + Snake.dirHash[this.dir][0] != 0){
+      this.dir = newDir;
+    }
   }
 
   Snake.prototype.head = function(){

@@ -8,7 +8,7 @@
   View.prototype.start = function(){
     this.board = new SnakeGame.Board();
     this.handleKeyEvent();
-    this.TIMER = setInterval(this.step.bind(this), 100);
+    this.TIMER = setInterval(this.step.bind(this), 150);
   }
 
   View.prototype.step = function(){
@@ -31,10 +31,13 @@
           cell.addClass("snake");
         } else if (char === "A") {
           cell.addClass("apple");
+        } else if (char === "H") {
+          cell.addClass("head")
         }
         $('.board').append(cell);
       })
     });
+    $('#score').html(this.board.score);
   }
 
   View.prototype.handleKeyEvent = function(event) {
