@@ -19,7 +19,8 @@
   }
 
   Snake.prototype.turn = function(newDir) {
-    if (Snake.dirHash[newDir][0] + Snake.dirHash[this.dir][0] != 0){
+    if (Snake.dirHash[newDir][0] + Snake.dirHash[this.dir][0] != 0 ||
+          this.dir === "X"){
       this.dir = newDir;
     }
   }

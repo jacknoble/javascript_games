@@ -1,6 +1,19 @@
+h1{
+  text-align: center;
+  font-family: "Lucida Console";
+}
+
+body{
+  background-color: lightblue;
+}
 .board {
   height: 600;
   width: 600;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  border-color: lightblue;
+  border-top-width: 0.5;
 }
 
 .cell {
@@ -9,7 +22,7 @@
   background: gray;
   display: inline-block;
   border-style: solid;
-  border-color: white;
+  border-color: lightblue;
   border-width: 2;
   box-sizing: border-box;
 }
@@ -25,3 +38,9 @@
 .head{
   background: darkgreen;
 }
+
+.score{
+  text-align: center;
+  font-size: 250%;
+}
+

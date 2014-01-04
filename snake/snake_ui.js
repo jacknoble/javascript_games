@@ -17,6 +17,7 @@
     if (this.board.hitWall() || this.board.snake.crashIntoSelf()){
       alert("You are dead.");
       clearInterval(this.TIMER);
+      $('h4').text("Press enter to play again!");
     } else {
      this.render();
     }
@@ -37,7 +38,7 @@
         $('.board').append(cell);
       })
     });
-    $('#score').html(this.board.score);
+    $('.score').html(this.board.score);
   }
 
   View.prototype.handleKeyEvent = function(event) {
@@ -54,11 +55,19 @@
     key('right', function(){
       snake.turn('E');
     });
+
+    key('p', function(){
+
+    })
   }
 
 })(this);
 
 $(function(){
-  v = new SnakeGame.View($('.board'))
-  v.start();
+  $('h4').text("Press enter to begin. Control with arrow keys.");
+  v = new SnakeGame.View($('.board'));
+  key('enter', function(){
+    $('h4').text("");
+    v.start();
+  })
 })
