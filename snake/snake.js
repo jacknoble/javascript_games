@@ -27,7 +27,18 @@
   }
 
   Snake.prototype.addSegment = function(){
-    this.segments.unshift([10000,1000])
+    this.segments.unshift([null,null])
+  }
+
+  Snake.prototype.crashIntoSelf = function() {
+    var head = this.head();
+    var segments = this.segments
+    for(i = 0; i < segments.length - 1; i ++ ){
+      var segment = segments[i];
+      if (segment[0] === head[0] && segment[1] === head[1]) {
+        return true;
+      }
+    }
   }
 
 })(this);

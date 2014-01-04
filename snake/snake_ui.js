@@ -8,14 +8,13 @@
   View.prototype.start = function(){
     this.board = new SnakeGame.Board();
     this.handleKeyEvent();
-    // this.step.bind(this)();
-    this.TIMER = setInterval(this.step.bind(this), 250);
+    this.TIMER = setInterval(this.step.bind(this), 100);
   }
 
   View.prototype.step = function(){
     this.board.snake.move();
     this.board.eatApple();
-    if (this.board.hitWall()){
+    if (this.board.hitWall() || this.board.snake.crashIntoSelf()){
       alert("You are dead.");
       clearInterval(this.TIMER);
     } else {

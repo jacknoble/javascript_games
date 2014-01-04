@@ -1,37 +1,18 @@
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
-};
-
 (function(root) {
   var SnakeGame = root.SnakeGame = ( root.SnakeGame || {} );
 
   var Board = SnakeGame.Board = function(){
-    this.snake = new SnakeGame.Snake([15,15]);
+    Board.SIZE = 30;
+    var start = Board.SIZE/2
+    this.snake = new SnakeGame.Snake([start, start]);
     this.apples = [];
     this.grid = Board.makeGrid();
-
-    for(var i=0; i<5; i++) {
-      this.addApple();
-    }
+    var that = this;
+    _(3).times(function(n){
+      that.addApple();
+    })
   };
 
-  Board.SIZE = 30;
-
-  // Board.prototype.render = function(){
-  //   renderedGrid = "";
-  //   var board = this;
-  //   this.grid.forEach(function(row, rowIndex){
-  //     renderedGrid += "\n";
-  //     row.forEach(function(cell, colIndex){
-  //       var isSnake = board.isSnake(rowIndex, colIndex)
-  //       renderedGrid += (isSnake) ? "S" : "*";
-  //     })
-  //   })
-  //
-  //   return renderedGrid;
-  // };
 
   Board.prototype.hitWall = function(){
     snakeHead = this.snake.head();
@@ -42,11 +23,13 @@ Array.prototype.remove = function(from, to) {
   Board.prototype.eatApple = function(){
     var snake = this.snake;
     var apples = this.apples
+    var board = this
     this.apples.forEach(function(apple, index){
       var head = snake.head();
       if (head[0] === apple[0] && head[1] === apple[1]){
-        apples.remove(index);
-        snake.addSegment();
+        apples.splice(index, 1);
+        _(3).times(function(n) { snake.addSegment() });
+        board.addApple();
       }
     })
   }
@@ -99,7 +82,7 @@ Array.prototype.remove = function(from, to) {
 
   Board.makeGrid = function(){
     var grid = []
-    for( i = 0; i < Board.SIZE; i++){
+    for(i = 0; i < Board.SIZE; i++){
       grid.push([])
       for(j = 0; j < Board.SIZE; j++){
         grid[i].push(null);
