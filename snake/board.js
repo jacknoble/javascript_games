@@ -2,8 +2,8 @@
   var SnakeGame = root.SnakeGame = ( root.SnakeGame || {} );
 
   var Board = SnakeGame.Board = function(){
-    Board.SIZE = 30;
-    var start = Board.SIZE/2
+    Board.SIZE = 25;
+    var start = Math.floor(Board.SIZE/2)
     this.snake = new SnakeGame.Snake([start, start]);
     this.apples = [];
     this.grid = Board.makeGrid();

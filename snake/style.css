@@ -7,8 +7,8 @@ body{
   background-color: lightblue;
 }
 .board {
-  height: 600;
-  width: 600;
+  height: 500;
+  width: 500;
   margin-left: auto;
   margin-right: auto;
   border-style: solid;
