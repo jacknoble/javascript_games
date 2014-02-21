@@ -66,6 +66,10 @@
 $(function(){
   $('h4').text("Press enter to begin. Control with arrow keys.");
   v = new SnakeGame.View($('.board'));
+  var browser=navigator.userAgent.toLowerCase();
+  if(browser.indexOf('firefox') > -1) {
+    $('.board').width("570px")
+  }
   key('enter', function(){
     $('h4').text("");
     v.start();
